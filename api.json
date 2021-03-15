@@ -1,0 +1,309 @@
+[
+    {
+        "name": "对象列表",
+        "url": "/object",
+        "method": "GET",
+        "param": {
+                "tag": ["标签名"],
+                "register": true
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": [
+                {
+                    "id": "id",
+                    "name": "名字",
+                    "ip": "IP地址",
+                    "uid": "用户id",
+                    "level": "节点层",
+                    "categorys": ["k8s", "mysql"],
+                    "groups": ["data", "gateway"],
+                    "status": "normal"
+                }
+            ]
+        }
+    },
+    {
+        "name": "添加对象",
+        "url": "/object",
+        "method": "POST",
+        "body": {
+            "name": "名字",
+            "ip": "IP地址",
+            "sshAccount": "ssh用户名",
+            "sshPassword": "ssh连接密码",
+            "sshPort": "ssh服务端口",
+            "uid": "用户id",
+            "level": "节点层",
+            "categorys": ["k8s", "mysql"],
+            "groups": ["data", "gateway"],
+            "status": "normal"
+        },
+
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    },
+    {
+        "name": "注册对象",
+        "url": "/object",
+        "method": "PUT",
+        "body": {
+            "ids": ["129uds", "23d2we2"]
+        },
+
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    },
+    {
+        "name": "标签列表",
+        "url": "/tag",
+        "method": "GET",
+        "param": {
+                "name": "标签名",
+                "popular": true,
+                "type": ["group", "level", "category"]
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": [
+                {
+                    "name": "名字",
+                    "id": "id"
+                }
+            ]
+        }
+    },
+    {
+        "name": "实例列表",
+        "url": "/object/instance",
+        "method": "GET",
+        "param": {
+                "objectId": "对象id",
+                "type": "controller|collector", 
+                "query": "任意输入信息"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": [
+                {
+                    "name": "名字",
+                    "ip": "IP地址",
+                    "id": "id",
+                    "status": "状态",
+                    "message": "信息",
+                    "createTime": "创建时间"
+                }
+            ]
+        }
+    },
+    {
+        "name": "用户名密码列表",
+        "url": "/user/keystore",
+        "method": "GET",
+        "param": {
+                "uid": "用户id"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": [
+                {
+                    "account": "账户",
+                    "password": "密码",
+                    "id": "id",
+                    "name": "SSH连接"
+                }
+            ]
+        }
+    },
+    {
+        "name": "提交用户名密码",
+        "url": "/user/keystore",
+        "method": "POST",
+        "body": {
+            "name": "SSH连接",
+            "account": "账户",
+            "password": "密码"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    },
+    {
+        "name": "修改用户名密码",
+        "url": "/user/keystore",
+        "method": "PUT",
+        "body": {
+                    "account": "账户",
+                    "password": "密码",
+                    "id": "id"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }  
+        }
+    },
+    {
+        "name": "删除用户名密码对",
+        "url": "/user/keystore",
+        "method": "DELETE",
+        "doby": {
+                "id": "id"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    },
+    {
+        "name": "配置信息",
+        "url": "/object/conf",
+        "method": "GET",
+        "param": {
+                "objectId": "对象id"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": {
+                    "id": "id",
+                    "pacel": {
+                        "url": "存储库地址",
+                        "account": "账户",
+                        "passowrd": "密码"
+                    },
+                    "ssh": {
+                        "port": 22,
+                        "account": "账户",
+                        "passowrd": "密码"
+                    },
+                    "filebeat": {
+                         "inputs": ["监控文件表达式", "/root/hi/*.log"],
+                         "output": "es地址"
+                    },
+                    "agent": {
+                        "port": 8080
+                    }
+            }
+        }
+    },
+    {
+        "name": "修改配置",
+        "url": "/object/conf",
+        "method": "PATCH",
+        "data": {
+                    "id": "id",
+                    "pacel": {
+                        "url": "存储库地址",
+                        "account": "账户",
+                        "passowrd": "密码"
+                    },
+                    "ssh": {
+                        "port": 22,
+                        "account": "账户",
+                        "passowrd": "密码"
+                    },
+                    "filebeat": {
+                         "input": "监控文件表达式",
+                         "output": "es地址"
+                    },
+                    "agent": {
+                        "url": "agent服务地址"
+                    }
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    },
+    {
+        "name": "分发",
+        "url": "/object/distribute",
+        "method": "POST",
+        "body": {
+            "objectId": "对象id",
+            "files": ["agnet.tar.gz"] 
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+            "data": {
+                "hook": "分发结果回调地址"
+            }
+        }
+    },
+
+    {
+        "name": "分发结果回调",
+        "url": "/object/distribute/hook",
+        "method": "GET",
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            },
+             "data": {
+                    "progress": "总进度",
+                    "list": [
+                        {
+                            "id": "id",
+                            "file": "agnet.tar.gz",
+                            "progress": 100,
+                            "status": "success",
+                            "ip": "IP地址"
+                        }
+                    ]
+            }
+        }
+    },
+
+    {
+        "name": "启停",
+        "url": "/object/action",
+        "method": "POST",
+        "body": {
+            "objectId": "实例id",
+            "name": "start | stop | restart"
+        },
+        "response": {
+            "code": {
+                "ok": 200,
+                "error": 400 
+            }
+        }
+    }
+    
+
+]

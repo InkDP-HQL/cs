@@ -1,0 +1,112 @@
+---
+swagger: "2.0"
+info:
+  description: This is a simple API
+  version: 1.0.0
+  title: front
+  contact:
+    email: dufan@bdatacloud.cn
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+host: virtserver.swaggerhub.com
+basePath: /dufan-TY/front/1.0.0
+tags:
+- name: member
+  description: 用户相关操作
+schemes:
+- https
+- http
+paths:
+  /login:
+    post:
+      tags:
+      - member
+      summary: 登录
+      description: |
+        通过用户名密码登录, 登录成功后返回token, 后续请求将携带token
+      operationId: accountLogin
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: accountLoginParam
+        description: 请求body参数
+        required: false
+        schema:
+          $ref: '#/definitions/accountLoginParam'
+      responses:
+        "200":
+          description: search results matching criteria
+          schema:
+            $ref: '#/definitions/accountLoginRes'
+        "401":
+          description: 处理失败
+          schema:
+            $ref: '#/definitions/errorResponse'
+  /register:
+    post:
+      tags:
+      - member
+      summary: 注册
+      description: |
+        用户注册
+      operationId: accountRegister
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: accountRegisterParam
+        description: 请求body参数
+        required: false
+        schema:
+          $ref: '#/definitions/accountRegisterParam'
+      responses:
+        "200":
+          description: 创建成功
+        "401":
+          description: 处理失败
+          schema:
+            $ref: '#/definitions/errorResponse'
+definitions:
+  accountLoginParam:
+    type: object
+    required:
+    - account
+    - password
+    properties:
+      account:
+        type: string
+        example: admin
+      password:
+        type: string
+        example: admin
+  accountLoginRes:
+    required:
+    - account
+    properties:
+      account:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+        example: 408-867-5309
+  accountRegisterParam:
+    required:
+    - account
+    - password
+    properties:
+      account:
+        type: string
+      password:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+        example: 408-867-5309
+  errorResponse:
+    properties:
+      message:
+        type: string
